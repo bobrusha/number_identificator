@@ -37,13 +37,17 @@ public class CallReceiver extends BroadcastReceiver {
                 Log.d(DEBUG_TAG, "Show window:" + phoneNumber);
 
             } else if (phoneState.equals(TelephonyManager.EXTRA_STATE_OFFHOOK)) {
+                closeWindow();
                 if (incomingCall) {
                     Log.d(DEBUG_TAG, "Close window.");
+                    closeWindow();
                     incomingCall = false;
                 }
             } else if (phoneState.equals(TelephonyManager.EXTRA_STATE_IDLE)) {
+                closeWindow();
                 if (incomingCall) {
                     Log.d(DEBUG_TAG, "Close window.");
+                    closeWindow();
                     incomingCall = false;
                 }
             }
@@ -60,9 +64,10 @@ public class CallReceiver extends BroadcastReceiver {
         WindowManager.LayoutParams params = new WindowManager.LayoutParams(
                 WindowManager.LayoutParams.MATCH_PARENT,
                 WindowManager.LayoutParams.WRAP_CONTENT,
-                WindowManager.LayoutParams.TYPE_SYSTEM_OVERLAY,
-                WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL | WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD | WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED,
+                WindowManager.LayoutParams.TYPE_SYSTEM_ERROR,
+                0,
                 PixelFormat.TRANSLUCENT);
+
         params.gravity = Gravity.TOP;
 
         windowLayout = (ViewGroup) layoutInflater.inflate(R.layout.info_view, null);
@@ -81,8 +86,10 @@ public class CallReceiver extends BroadcastReceiver {
     }
 
     private void closeWindow() {
+        Log.d(DEBUG_TAG, "in close window");
         if (windowLayout != null) {
-            windowManager.removeView(windowLayout);
+            Log.d(DEBUG_TAG, "null");
+            windowManager.removeViewImmediate(windowLayout);
             windowLayout = null;
         }
     }
