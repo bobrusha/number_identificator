@@ -24,7 +24,6 @@ public class CallReceiver extends BroadcastReceiver {
 
     private boolean incomingCall = false;
 
-
     @Override
     public void onReceive(Context context, Intent intent) {
 
@@ -35,7 +34,6 @@ public class CallReceiver extends BroadcastReceiver {
                 incomingCall = true;
                 showWindow(context, phoneNumber);
                 Log.d(DEBUG_TAG, "Show window:" + phoneNumber);
-
             } else if (phoneState.equals(TelephonyManager.EXTRA_STATE_OFFHOOK)) {
                 closeWindow();
                 if (incomingCall) {
@@ -71,10 +69,11 @@ public class CallReceiver extends BroadcastReceiver {
         params.gravity = Gravity.TOP;
 
         windowLayout = (ViewGroup) layoutInflater.inflate(R.layout.info_view, null);
-
-        TextView textViewNumber = (TextView) windowLayout.findViewById(R.id.textViewNumber);
         ImageButton buttonClose = (ImageButton) windowLayout.findViewById(R.id.buttonClose);
-        textViewNumber.setText(phone);
+
+        TextView textViewMainInformation = (TextView) windowLayout.findViewById(R.id.textViewPhoneInformation);
+
+        SeacherManager.getInstance().loadSearchResultAsync(phone, textViewMainInformation);
         buttonClose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

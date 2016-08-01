@@ -1,27 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@android:color/background_light"
-                android:orientation="vertical">
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#ffdd60">
 
     <ImageButton
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
         android:id="@+id/buttonClose"
         style="@style/Base.Widget.AppCompat.Button.Borderless"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
         android:src="@drawable/ic_close_black_24dp"/>
 
     <TextView
-        android:textColor="@android:color/black"
-        android:layout_alignParentLeft="true"
-        android:id="@+id/textViewNumber"
-        android:textSize="32sp"
+        android:id="@+id/header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_toLeftOf="@+id/buttonClose"
+        android:padding="@dimen/activity_horizontal_margin"
+        android:text="Определение номера"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
         />
 
+    <TextView
+        android:id="@+id/textViewPhoneInformation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/header"
+        android:background="@android:color/white"
+        android:padding="8dp"
+        android:textColor="@android:color/black"
+        android:textSize="20sp"
+        />
 
 </RelativeLayout>
